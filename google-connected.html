@@ -12,63 +12,94 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f8fafc;
             padding: 20px;
         }
         .card {
             background: white;
-            border-radius: 24px;
+            border-radius: 16px;
             padding: 48px;
-            max-width: 480px;
+            max-width: 440px;
             width: 100%;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
             text-align: center;
+            border: 1px solid #e2e8f0;
         }
         .icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
+            width: 72px;
+            height: 72px;
+            background: #10b981;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 24px;
-            font-size: 40px;
+            font-size: 32px;
             color: white;
         }
-        h1 { color: #1f2937; font-size: 24px; margin-bottom: 8px; }
-        .subtitle { color: #6b7280; font-size: 16px; margin-bottom: 24px; }
-        .email {
-            background: #f3f4f6;
-            padding: 12px 20px;
-            border-radius: 12px;
-            margin-bottom: 32px;
+        h1 { 
+            color: #111827; 
+            font-size: 22px; 
+            margin-bottom: 8px;
             font-weight: 600;
-            color: #374151;
         }
-        .buttons { display: flex; flex-direction: column; gap: 12px; }
+        .subtitle { 
+            color: #6b7280; 
+            font-size: 15px; 
+            margin-bottom: 20px;
+        }
+        .email {
+            background: #f1f5f9;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 28px;
+            font-weight: 500;
+            color: #334155;
+            font-size: 14px;
+        }
+        .buttons { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px 24px;
-            border-radius: 12px;
+            padding: 14px 24px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.2s ease;
         }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .btn-primary { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
-        .btn-secondary { background: #f3f4f6; color: #374151; }
-        .footer { margin-top: 32px; color: #9ca3af; font-size: 14px; }
+        .btn-primary { 
+            background: #111827; 
+            color: white; 
+        }
+        .btn-primary:hover { 
+            background: #1f2937; 
+        }
+        .btn-secondary { 
+            background: #f1f5f9; 
+            color: #334155;
+            border: 1px solid #e2e8f0;
+        }
+        .btn-secondary:hover { 
+            background: #e2e8f0; 
+        }
+        .footer { 
+            margin-top: 28px; 
+            color: #9ca3af; 
+            font-size: 13px; 
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="icon">✓</div>
-        <h1 id="message">Your sheet is ready!</h1>
-        <p class="subtitle">Connected as:</p>
+        <h1 id="message">Connected! You're all set.</h1>
+        <p class="subtitle">Signed in as:</p>
         <div class="email" id="email">Loading...</div>
         <div class="buttons" id="buttons"></div>
         <p class="footer">You can close this window</p>
@@ -76,7 +107,11 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         document.getElementById('email').textContent = params.get('email') || 'Unknown';
-        document.getElementById('message').textContent = params.get('message') || 'Your sheet is ready!';
+        
+        const message = params.get('message');
+        if (message) {
+            document.getElementById('message').textContent = message;
+        }
         
         const buttons = document.getElementById('buttons');
         const sheet = params.get('sheet');
